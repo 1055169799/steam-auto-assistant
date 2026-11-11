@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steam 喜加一插件 · 使用说明</title>
+<style>
+  :root {
+    --ink: #1b2838;
+    --ink-2: #2a475e;
+    --muted: #5c6b7a;
+    --line: #e3e8ee;
+    --bg: #ffffff;
+    --soft: #f5f8fb;
+    --accent: #67c1f5;
+    --accent-deep: #1a9fff;
+    --green: #4c9a2a;
+    --amber: #b26b00;
+    --red: #b93a3a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #eef3f8;
+    color: var(--ink);
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 900px;
+    margin: 32px auto 64px;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 28px rgba(27, 40, 56, .10);
+    overflow: hidden;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #1b2838 0%, #2a475e 60%, #35607f 100%);
+    color: #fff;
+    padding: 34px 44px 30px;
+  }
+  header.hero h1 {
+    margin: 0 0 10px;
+    font-size: 27px;
+    letter-spacing: .5px;
+    font-weight: 700;
+  }
+  header.hero .sub {
+    margin: 0;
+    font-size: 14px;
+    color: #b9d6ea;
+    line-height: 1.7;
+  }
+  header.hero .badges { margin-top: 16px; }
+  .badge {
+    display: inline-block;
+    background: rgba(103, 193, 245, .16);
+    border: 1px solid rgba(103, 193, 245, .45);
+    color: #cdeaff;
+    border-radius: 999px;
+    padding: 3px 12px;
+    font-size: 12.5px;
+    margin: 0 8px 8px 0;
+  }
+  main { padding: 8px 44px 44px; }
+  h2 {
+    font-size: 19px;
+    margin: 40px 0 14px;
+    padding-left: 12px;
+    border-left: 4px solid var(--accent-deep);
+    line-height: 1.4;
+  }
+  h3 {
+    font-size: 15.5px;
+    margin: 26px 0 8px;
+    color: var(--ink-2);
+  }
+  p { margin: 10px 0; }
+  ul, ol { margin: 10px 0 10px 0; padding-left: 22px; }
+  li { margin: 6px 0; }
+  strong { color: var(--ink-2); }
+  code {
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13.5px;
+    color: #0f4a72;
+  }
+  .step {
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px 14px;
+    margin: 16px 0;
+  }
+  .step > .step-title {
+    font-weight: 700;
+    color: var(--ink-2);
+    font-size: 15.5px;
+    margin-bottom: 6px;
+  }
+  .tip, .warn, .danger {
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14.5px;
+    line-height: 1.8;
+  }
+  .tip { background: #f0f8ee; border-left: 4px solid var(--green); }
+  .warn { background: #fff8e9; border-left: 4px solid var(--amber); }
+  .danger { background: #fdf0f0; border-left: 4px solid var(--red); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14.5px;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--soft);
+    color: var(--ink-2);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: #fbfdff; }
+  .faq {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    background: #fff;
+  }
+  .faq .q {
+    font-weight: 700;
+    color: var(--ink-2);
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+  .faq .q .no {
+    display: inline-block;
+    min-width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    background: var(--accent-deep);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12.5px;
+    margin-right: 8px;
+    vertical-align: 1px;
+  }
+  .faq p:last-child { margin-bottom: 0; }
+  .kv { color: var(--muted); }
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 40px;
+    padding-top: 18px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  @media (max-width: 720px) {
+    header.hero, main { padding-left: 22px; padding-right: 22px; }
+    body { font-size: 14.5px; }
+    .page { margin: 12px 10px 32px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; max-width: none; }
+    .faq, .step { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <h1>Steam 喜加一插件 · 使用说明</h1>
+    <p class="sub">这份说明不涉及任何编程知识，按顺序照做即可。<br>适用版本 1.0.0 ｜ 运行环境：Steam 客户端内置浏览器（Windows）</p>
+    <div class="badges">
+      <span class="badge">不需要 cookies 权限</span>
+      <span class="badge">不外传任何数据</span>
+      <span class="badge">自动领取默认关闭</span>
+    </div>
+  </header>
+
+  <main>
+
+    <h2>一、这个插件是做什么的</h2>
+    <p>Steam 经常会有限时免费（Free to Keep）的游戏和 DLC——在一段时间内点一下「添加到账户」，就永久留在你的库里。</p>
+    <p>这个插件帮你省掉「一个个点进商店页看是不是免费、是不是已经领过」的力气：</p>
+    <ol>
+      <li>自动检索当前所有 100% 折扣的限免条目；</li>
+      <li>拿检索结果跟你自己的游戏库比对；</li>
+      <li>把没拥有的整理成一份清单给你看；</li>
+      <li>如果你想，还可以让它直接帮你把它们领进库。</li>
+    </ol>
+
+    <h3>关于安全性，请先了解这几点</h3>
+    <div class="tip">
+      <ul>
+        <li>插件运行在 <strong>Steam 客户端内置的浏览器</strong>里（也就是你在 Steam 里点「商店」看到的那个页面），不是独立的软件，也不在后台偷偷跑。</li>
+        <li>插件<strong>不申请 cookies 权限</strong>，也不读取、不保存你的账号密码、令牌等任何凭据。</li>
+        <li>所有网络请求都是<strong>在商店页面内、以你自己的登录身份发出的</strong>（同源请求），访问的只有 <code>store.steampowered.com</code> 这一官方域名。</li>
+        <li>插件<strong>不向任何第三方服务器上传数据</strong>，没有统计、没有回传，扫描结果只显示在你自己的屏幕上。</li>
+      </ul>
+    </div>
+
+    <h2>二、安装步骤</h2>
+
+    <div class="step">
+      <div class="step-title">第 1 步：打开 Steam 客户端的扩展管理页</div>
+      <p>在 Steam 窗口里点顶部导航的「<strong>商店</strong>」，让内置浏览器显示商店页面。</p>
+      <div class="warn">
+        Steam 内置浏览器里 <code>Ctrl + L</code> <strong>打不开</strong>地址栏，在商店页面上直接点地址栏也输入不进内容。请严格按下面三步操作，才能打开扩展管理页。
+      </div>
+      <ol>
+        <li>在商店页面里找<strong>任意一个游戏或链接</strong>（游戏封面、游戏名称、商店里的任意链接都行），把鼠标放在它上面，点<strong>右键</strong>；</li>
+        <li>在弹出的菜单里选「<strong>在新选项卡中打开链接</strong>」——这时才会弹出一个<strong>带地址栏的浏览器窗口</strong>；</li>
+        <li>在这个新窗口的<strong>地址栏</strong>里粘贴下面的地址，按回车：</li>
+      </ol>
+      <p><code>chrome://extensions</code></p>
+      <div class="warn">
+        如果这个地址打不开、或者输入后没有反应，说明你的 Steam 客户端还没有具备加载浏览器扩展的能力。这种情况需要先安装两个前置组件（Millennium 与 Extendium），安装方法与下载地址见插件目录里的 <code>README.md</code>「一、在 Steam 客户端里使用的前置条件」一节。装好并重启 Steam 之后，再回到这里的第 1 步。
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 2 步：开启「开发者模式」</div>
+      <p>扩展管理页打开后，看<strong>右上角</strong>，找到「<strong>开发者模式</strong>」开关，把它打开（开关变蓝／变亮即为开启）。</p>
+      <p>打开后，页面上会多出几个按钮，其中有一个叫「加载已解压的扩展程序」。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 3 步：把文件夹直接拖进去</div>
+      <div class="danger">
+        <strong>这一步请严格按下面的方法做，不要点「加载已解压的扩展程序」按钮。</strong>
+      </div>
+      <ol>
+        <li>打开 Windows 资源管理器，进到存放插件的文件夹，找到里面的 <code>steam-free-claimer</code> 这个文件夹；</li>
+        <li>用鼠标<strong>按住这个文件夹</strong>（是文件夹本身，不是文件夹里面的某个文件）；</li>
+        <li>把它<strong>拖到</strong>第 1 步打开的扩展管理页面的<strong>空白处</strong>，松开鼠标。</li>
+      </ol>
+      <p>页面上会弹出一个小提示，随后列表里出现一张「<strong>Steam 喜加一助手</strong>」的卡片，说明安装成功。</p>
+
+      <h3>为什么不能用「加载已解压的扩展程序」按钮？</h3>
+      <p>因为 Steam 内置浏览器的内核（CEF）在这个按钮上弹出的选择框是<strong>只能选文件、不能选文件夹</strong>的（普通 Chrome 弹出的是「选择文件夹」）。一旦你用它去选文件夹，要么选不进去，要么选成了文件夹里的某一个文件，插件就会加载失败或提示清单文件无效。而「把文件夹拖进去」这条路走的是另一套识别逻辑，可以正常识别整个文件夹，所以请用拖拽的方式。</p>
+
+      <h3>装好之后请注意</h3>
+      <ul>
+        <li>不要删除、不要移动、不要改名 <code>steam-free-claimer</code> 这个文件夹。扩展是「引用」这个文件夹里文件的，文件夹一挪动或删掉，插件就失效了。</li>
+        <li>如果你把插件复制到了别的位置，需要在新位置重新执行一次拖拽安装。</li>
+      </ul>
+    </div>
+
+    <h2>三、开始使用</h2>
+
+    <div class="step">
+      <div class="step-title">第 1 步：进商店页</div>
+      <p>安装完成后，点 Steam 顶部导航的「<strong>商店</strong>」，重新打开一次商店页面。如果已经停在商店页，用下面两种方式刷新（<strong>Steam 商店页按 <code>F5</code> 不生效</strong>）：点一下顶部导航栏的「<strong>商店</strong>」按钮，或者点页面下方<strong>地址栏左侧的刷新按钮</strong>。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 2 步：找右下角的绿色悬浮球</div>
+      <p>商店页<strong>右下角</strong>会出现一个绿色的圆形小按钮，上面写着「<strong>喜+1</strong>」。</p>
+      <ul>
+        <li>这个球可以<strong>按住拖动</strong>，挡住内容时把它拖到别的位置；</li>
+        <li>它的位置会被记住，下次打开商店页还在你放的地方；</li>
+        <li>如果没看到它，先确认页面确实刷新过，再确认扩展在管理页里处于「已启用」状态。</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 3 步：展开面板</div>
+      <p><strong>点一下</strong>绿色小球，面板就会展开；再次点击小球（或点面板右上角的「收起」）即可折叠。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 4 步：确认登录状态</div>
+      <p>面板第一行是「<strong>登录状态：</strong>」，正常情况下应该显示「<strong>已登录</strong>」。</p>
+      <ul>
+        <li>如果显示「<strong>未登录</strong>」：请在商店页确认右上角显示的是你自己的头像（说明确实登录着 Steam），然后刷新页面重试。</li>
+        <li>如果显示「<strong>登录状态未知</strong>」并伴有提示：说明检测请求没发出去（多半是网络问题），请看后面「常见问题」第 1 条。</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 5 步：点击「扫描限免」</div>
+      <p>点面板里的「<strong>扫描限免</strong>」按钮，开始检索。</p>
+      <ul>
+        <li>扫描过程中，进度行会滚动显示当前在做的事；此时「中止」按钮会变为可用，想停下来随时可以点它。</li>
+        <li>扫描会逐条核对，条目多时需要等一会儿，请耐心等待，<strong>不要重复点击按钮</strong>。</li>
+        <li>扫描期间，面板上的「自动领取」开关会临时变为不可改动，这是正常现象。</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 6 步：等待「扫描完成」</div>
+      <p>当进度行显示「<strong>扫描完成：共检索 N 项</strong>」时，就结束收尾了：</p>
+      <ul>
+        <li>如果你<strong>没有</strong>勾选「自动领取」，这句提示后面还会补一句「（未勾选自动领取，仅试运行）」，表示这次只是查了一遍，什么都没领。</li>
+        <li>如果你勾选了「自动领取」，那么在这之前它就已经把能领的都尝试领完了。</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-title">第 7 步：看结果</div>
+      <ul>
+        <li><strong>点明细里的任意一条</strong>，会在商店里打开对应游戏的页面，你可以自己肉眼确认一下。</li>
+        <li>明细区里，同一款游戏如果已经被成功领取，就不会再在「可领取」里重复出现，避免重复操作。</li>
+      </ul>
+    </div>
+
+    <h2>四、「自动领取」这个开关</h2>
+    <p><strong>默认是关着的。</strong> 这个默认值是有意设计的：</p>
+    <table>
+      <thead>
+        <tr><th>开关状态</th><th>插件会做什么</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>未勾选（默认）</td><td><strong>只出报告，不出手</strong>。扫描完你看到清单，想领哪一个就点明细里的链接，自己去商店点「添加到账户」。</td></tr>
+        <tr><td>已勾选</td><td>扫描过程中，对每一个确认可领取的条目<strong>真正发起领取请求</strong>，把它加进你的库。</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>勾选状态会被<strong>记住</strong>，你下次打开 Steam、打开面板，它还是你上次的设定（关闭插件也不会被重置）。所以如果你只想查不想领，记得手动取消勾选。</li>
+      <li>领取操作之间带有<strong>随机等待</strong>（大约 3 到 9 秒一次），不是一口气狂刷，这是有意放慢的，请不要尝试改成更快。</li>
+      <li>单次扫描处理的数量有上限（约 600 条），不会无限翻页。</li>
+    </ul>
+
+    <h2>五、五个数字分别是什么意思</h2>
+    <p>扫描结束后，面板上会给出五类统计：</p>
+    <table>
+      <thead>
+        <tr><th>分类</th><th>含义</th><th>你需要做什么</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>已领取</strong></td>
+          <td>这次扫描中，插件成功把它加进了你的账户（只在你勾选了自动领取时才会有数字）。</td>
+          <td>不用管，去库里就能看到。</td>
+        </tr>
+        <tr>
+          <td><strong>库中已有</strong></td>
+          <td>这个条目你原本就有——已经领过、已经买过，或者它本来就是永久免费的游戏。</td>
+          <td>不用管。</td>
+        </tr>
+        <tr>
+          <td><strong>可领取</strong></td>
+          <td>当前确实限时免费、且你的库里没有。<strong>这是你最该看的一栏。</strong> 未勾选自动领取时，就是让你照着这里自己去领。</td>
+          <td>点明细里的条目，去商店页面点「添加到账户」。</td>
+        </tr>
+        <tr>
+          <td><strong>需本体</strong></td>
+          <td>这个条目是某个游戏的 DLC（追加内容）或捆绑包，你得先拥有它的<strong>基础游戏（本体）</strong>才能领。常见提示形如「需本体：某游戏名称」。</td>
+          <td>要么先去买／领取本体，要么就放弃这一条。<strong>DLC 没法脱离本体单独领。</strong></td>
+        </tr>
+        <tr>
+          <td><strong>失败</strong></td>
+          <td>尝试领取但没有成功，例如区域限制、Steam 接口繁忙、条目刚下架等。明细里会附一句原因。</td>
+          <td>看明细里的原因；若只是偶发，下次扫描会再试。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>重点说一句「需本体」</h3>
+    <p>插件在你真正发领取请求<strong>之前</strong>就已经做了预判：它会先确认这条 DLC 依赖的本体游戏你是否有。如果本体不在你的库里，就直接归到「需本体」，并显示「需本体：本体名称」，<strong>不会再向 Steam 发一次注定失败的领取请求</strong>。所以你看到「需本体」不是插件出错了，而是它替你挡住了无效操作。</p>
+
+    <h2>六、常见问题</h2>
+
+    <div class="faq">
+      <p class="q"><span class="no">1</span>页面报 -101 / -118 之类的「服务器连接失败」</p>
+      <p>这是<strong>网络问题</strong>，不是插件问题（-101、-118 是浏览器内核表示「连不上服务器」的错误码）。</p>
+      <p>处理办法：开启你的代理／加速器，或者换一个网络环境，然后点 Steam 顶部导航的「<strong>商店</strong>」重新打开商店页面，再点一次「扫描限免」。</p>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">2</span>失败了，但只显示「HTTP 200 → 站点错误」这种话，看不到详细原因</p>
+      <p>这是正常的显示设计。面板只给你一句简短的结论，方便一眼扫完；完整的原始响应内容记录在扩展内部的 <code>report.debug</code> 里，属于给开发者排查用的信息，面板上<strong>不会</strong>展示，也不影响你正常使用。</p>
+      <p>判断原则：偶发的「失败」下次扫描通常会自己恢复；如果每一条都失败，先按上一条检查网络。</p>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">3</span>为什么找不到弹出的小窗口（popup）和「设置」页面？</p>
+      <p>因为 Steam 内置浏览器（CEF）<strong>不渲染扩展的工具栏图标，也不支持点击图标弹出小窗口</strong>。所以插件把界面改成了直接画在商店页面右下角的绿色悬浮球 + 面板，你<strong>不需要</strong>去找任何弹出窗。</p>
+      <div class="danger">
+        <strong>特别提醒</strong>：在扩展管理页里，请<strong>不要</strong>点击这个插件卡片上的「<strong>检查视图</strong>」和「<strong>扩展程序选项</strong>」——在 Steam 内置浏览器里点它们会导致 Steam 的浏览器窗口直接崩溃。想改设置或看状态，一律通过页面右下角的悬浮球面板。
+      </div>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">4</span>Console 里看到 Service Worker 显示「无效」</p>
+      <p>这是 Steam 内置浏览器的内核限制导致的显示状态，<strong>不影响插件的正常使用</strong>，请忽略。你只需要关心商店页右下角的悬浮球能不能正常出现、能不能正常扫描。</p>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">5</span>我修改／替换了插件文件，为什么没生效？</p>
+      <p>改动 <code>content.js</code> 之后，必须<strong>完全退出 Steam</strong>（右下角托盘图标右键退出，而不是只关窗口），再重新启动 Steam，插件才会重新加载。仅刷新页面是不够的。</p>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">6</span>扫描完，提示「未检测到登录状态」或「登录状态检测失败」</p>
+      <ul>
+        <li>「<strong>未检测到登录状态</strong>」：说明 Steam 确实把这台机器当作未登录。请在商店首页确认右上角显示你的头像，然后刷新重试。</li>
+        <li>「<strong>登录状态检测失败：无法访问 Steam 接口</strong>」：这是<strong>另一个问题</strong>——请求没发出去或没拿到正常响应（断网、接口临时异常等），此时面板登录行会显示「登录状态未知」。检查网络后再试。</li>
+      </ul>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">7</span>扫描完发现全是「库中已有」，一个「可领取」都没有</p>
+      <p>可能是这段时间 Steam 确实没有新的限免条目，检索到的都是永久免费游戏（Free to Play，本来就人人都有）。属于正常情况，隔几天再扫一次即可。</p>
+    </div>
+
+    <div class="faq">
+      <p class="q"><span class="no">8</span>点了「扫描限免」没反应</p>
+      <p>先确认：商店页是重新打开过的；悬浮球面板处于展开状态；面板提示没有停在「已有任务在执行中」这类状态（如果是，先点「中止」或等它结束）。仍然不行的话，在扩展管理页把这个插件移除，重新执行一遍「安装步骤」的第 3 步。</p>
+    </div>
+
+    <h2>七、注意事项</h2>
+    <div class="warn">
+      <ol>
+        <li><strong>自动领取属于 Steam 用户协议的灰色地带。</strong> 它的本质是脚本代替你在商店页点「添加到账户」，属于协议中提到的「第三方自动化工具」范畴。业界存在账号因高频、批量自动化操作被标记的先例。<strong>是否开启「自动领取」请你自己判断、自己承担相应风险。</strong></li>
+        <li>如果你希望稳一点：平时保持「自动领取」<strong>不勾选</strong>，只用它出清单，然后照着「可领取」里的条目手动去点，效果一样，风险最小。</li>
+        <li><strong>插件不代管密码、不读取凭据。</strong> 它没有 cookies 权限，也无法获取你的密码、令牌、邮箱验证码。登录状态完全由你在 Steam 里自己完成。</li>
+        <li>不要随意把这个文件夹发给别人去「试试」——它引用的是你本机的登录环境，插件本身没问题，但涉及账号的东西建议只在自己机器上用。</li>
+        <li>万一发现账号领取出现异常，请<strong>立刻取消勾选「自动领取」</strong>，改用报告模式手动领取，并检查账号安全设置。</li>
+      </ol>
+    </div>
+
+    <h2>八、插件文件清单</h2>
+    <p>插件目录 <code>steam-free-claimer</code> 里应有以下文件，若缺失说明复制不完整，请重新复制：</p>
+    <table>
+      <thead>
+        <tr><th>文件</th><th>作用</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>manifest.json</code></td><td>插件清单，描述名称、权限、加载入口</td></tr>
+        <tr><td><code>background.js</code></td><td>后台调度（普通浏览器环境下使用）</td></tr>
+        <tr><td><code>content.js</code></td><td>核心逻辑：检索限免、比对库、领取，以及右下角的悬浮球面板</td></tr>
+        <tr><td><code>popup.html</code> / <code>popup.js</code> / <code>popup.css</code></td><td>弹出面板（普通 Chrome 环境使用；Steam 内置浏览器不显示）</td></tr>
+        <tr><td><code>options.html</code> / <code>options.js</code></td><td>设置页（普通 Chrome 环境使用；Steam 内置浏览器不显示）</td></tr>
+        <tr><td><code>README.md</code></td><td>技术说明：原理、前置组件、接口流程</td></tr>
+        <tr><td><code>使用说明.md</code></td><td>同一份说明书的纯文本版（Markdown）</td></tr>
+        <tr><td><code>使用说明.html</code></td><td>就是你正在看的这份网页版，双击即可用浏览器阅读</td></tr>
+      </tbody>
+    </table>
+
+    <footer>
+      <p>祝你把该领的都领完，库里的数字一直涨。</p>
+      <p class="kv">Steam 喜加一插件 · 使用说明 ｜ 版本 1.0.0</p>
+    </footer>
+
+  </main>
+</div>
+</body>
+</html>

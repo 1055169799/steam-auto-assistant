@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Steam 自动助手",
+  "version": "2.1.4",
+  "description": "两大能力：①喜加一——检索 Steam 限时免费游戏，对比你的游戏库，自动领取未拥有的作品；②自动启动——扫描本地 Steam 库与自定义游戏，勾选后下次启动 Steam 自动依次运行。",
+  "minimum_chrome_version": "96",
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://store.steampowered.com/*",
+    "https://steamloopback.host/*",
+    "http://127.0.0.1:17380/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Steam 自动助手"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://store.steampowered.com/*",
+        "https://steamloopback.host/*"
+      ],
+      "match_origin_as_fallback": true,
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# 运行时数据
+**/helper/config.json
+**/helper/helper.log
+*.log
+# 系统与编辑器
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+__pycache__/
+*.bak
+
+# 用户自定义游戏清单
+custom-games.json

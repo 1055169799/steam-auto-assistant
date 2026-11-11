@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Steam 喜加一助手",
+  "version": "1.0.0",
+  "description": "检索 Steam 限时免费游戏，对比你的游戏库，自动领取未拥有的作品。",
+  "minimum_chrome_version": "96",
+  "permissions": ["storage", "alarms", "tabs", "scripting"],
+  "host_permissions": ["https://store.steampowered.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Steam 喜加一助手"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://store.steampowered.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

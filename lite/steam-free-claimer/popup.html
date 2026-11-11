@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <span class="logo">Steam 喜加一</span>
+    <span id="loginBadge" class="badge">检测中</span>
+  </header>
+
+  <div class="actions">
+    <button id="scanBtn" class="primary">扫描限免</button>
+    <button id="stopBtn" class="ghost" disabled>中止</button>
+    <button id="optionsBtn" class="ghost" title="设置">⚙</button>
+  </div>
+
+  <label class="toggle">
+    <input type="checkbox" id="autoClaim" />
+    <span>自动领取（关闭时只生成报告）</span>
+  </label>
+
+  <div id="progressWrap" class="progress hidden">
+    <div class="bar"><i id="barFill"></i></div>
+    <p id="progressText">准备中…</p>
+  </div>
+
+  <div id="summary" class="summary hidden"></div>
+
+  <ul id="list" class="list"></ul>
+
+  <footer>
+    <span id="lastRun">尚未运行</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
