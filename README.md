@@ -8,8 +8,8 @@ Steam 客户端内嵌浏览器扩展，一键领取限时免费游戏，可选�
 
 | 版本 | 仓库目录 | 功能范围 | 适用人群 | 当前版本号 | 下载包名 |
 | --- | --- | --- | --- | --- | --- |
-| 喜加一版（lite） | `lite/steam-free-claimer/` | 限时免费游戏查询、一键领取 | 只需要领游戏，不希望有任何后台进程的用户 | 1.0.0 | `Steam喜加一插件.zip` |
-| 自动助手版（full） | `full/steam-free-claimer/` | 喜加一版的全部功能，外加启动 Steam 后自动运行勾选的游戏 | 需要挂卡、挂机、固定开局游戏的用户 | 2.1.4 | `Steam自动助手_2.1.4.zip` |
+| 喜加一版（lite） | `lite/steam-free-claimer/` | 限时免费游戏查询、一键领取 | 只需要领游戏，不希望有任何后台进程的用户 | 1.0.0 | `steam-free-claimer-1.0.0.zip` |
+| 自动助手版（full） | `full/steam-free-claimer/` | 喜加一版的全部功能，外加启动 Steam 后自动运行勾选的游戏 | 需要挂卡、挂机、固定开局游戏的用户 | 2.1.4 | `steam-auto-assistant-2.1.4.zip` |
 
 比较项补充：两个版本共用同一套悬浮球与面板界面，领取逻辑完全一致，差别只在于自动助手版多一个本地 helper 进程负责自动启动游戏。
 
@@ -66,14 +66,11 @@ steam-auto-assistant/
       ├─ README.md
       ├─ 使用说明.md
       ├─ 使用说明.html
-      ├─ backup-v1/
-      │  └─ content.js              早期版本留档，不参与加载
       └─ helper/
          ├─ helper.ps1              本地助手主程序
          ├─ start-helper.vbs        静默启动入口
          ├─ install-autostart.ps1   注册开机自启
          ├─ uninstall-autostart.ps1 取消开机自启
-         ├─ custom-games.json       自定义游戏列表
          └─ 使用说明.txt
 ```
 
@@ -81,12 +78,12 @@ steam-auto-assistant/
 
 ## 六、下载
 
-前往本仓库 Releases 页面下载打包好的压缩包：
+前往本仓库 [Releases](https://github.com/1055169799/steam-auto-assistant/releases) 页面下载打包好的压缩包：
 
-| 压缩包 | 对应版本 |
-| --- | --- |
-| `Steam喜加一插件.zip` | 喜加一版 1.0.0（lite） |
-| `Steam自动助手_2.1.4.zip` | 自动助手版 2.1.4（full） |
+| 压缩包 | 对应版本 | 发布页 |
+| --- | --- | --- |
+| `steam-free-claimer-1.0.0.zip` | 喜加一版 1.0.0（lite） | [v1.0.0](https://github.com/1055169799/steam-auto-assistant/releases/tag/v1.0.0) |
+| `steam-auto-assistant-2.1.4.zip` | 自动助手版 2.1.4（full） | [v2.1.4](https://github.com/1055169799/steam-auto-assistant/releases/tag/v2.1.4) |
 
 两个压缩包内均为 `steam-free-claimer/` 目录，解压后直接按第三节的安装步骤加载即可。
 
